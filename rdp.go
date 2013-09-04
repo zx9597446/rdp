@@ -1,12 +1,12 @@
 package rdp
 
-import "math"
+import (
+	"image"
 
-type Point struct {
-	X, Y int
-}
+	"math"
+)
 
-func findPerpendicularDistance(p, p1, p2 Point) (result float64) {
+func findPerpendicularDistance(p, p1, p2 image.Point) (result float64) {
 	if p1.X == p2.X {
 		result = math.Abs(float64(p.X - p1.X))
 	} else {
@@ -17,7 +17,7 @@ func findPerpendicularDistance(p, p1, p2 Point) (result float64) {
 	return
 }
 
-func Process(points []Point, epsilon float64) []Point {
+func Process(points []image.Point, epsilon float64) []image.Point {
 	firstPoint := points[0]
 	lastPoint := points[len(points)-1]
 	if len(points) < 3 {
@@ -40,9 +40,9 @@ func Process(points []Point, epsilon float64) []Point {
 		rs := append(r1[0:len(r1)-1], r2...)
 		return rs
 	} else {
-		ret := make([]Point, 0)
+		ret := make([]image.Point, 0)
 		ret = append(ret, firstPoint, lastPoint)
 		return ret
 	}
-	return make([]Point, 0)
+	return make([]image.Point, 0)
 }

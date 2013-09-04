@@ -16,7 +16,7 @@ func panicIfErr(err error) {
 	}
 }
 
-func debugDraw(result []marchingsquare.Point, oldfile, newfile string, what color.Color) {
+func debugDraw(result []image.Point, oldfile, newfile string, what color.Color) {
 	old, err := os.Open(oldfile)
 	defer old.Close()
 	panicIfErr(err)
@@ -40,15 +40,7 @@ func debugDraw(result []marchingsquare.Point, oldfile, newfile string, what colo
 
 func main() {
 	ret := marchingsquare.ProcessWithFile("terrain.png", marchingsquare.TransparentTest)
-	points := make([]rdp.Point, 0)
-	for _, v := range ret {
-		points = append(points, rdp.Point{v.X, v.Y})
-	}
-	result := rdp.Process(points, 0.50)
+	result := rdp.Process(ret, 0.50)
 	fmt.Println(len(ret), len(result))
-	ret2 := make([]marchingsquare.Point, 0)
-	for _, v := range result {
-		ret2 = append(ret2, marchingsquare.Point{v.X, v.Y})
-	}
-	debugDraw(ret2, "terrain.png", "new.png", color.RGBA{255, 0, 0, 255})
+	debugDraw(result, "terrain.png", "new.png", color.RGBA{255, 0, 0, 255})
 }
