@@ -18,11 +18,11 @@ func findPerpendicularDistance(p, p1, p2 image.Point) (result float64) {
 }
 
 func Process(points []image.Point, epsilon float64) []image.Point {
-	firstPoint := points[0]
-	lastPoint := points[len(points)-1]
 	if len(points) < 3 {
 		return points
 	}
+	firstPoint := points[0]
+	lastPoint := points[len(points)-1]
 	index := -1
 	dist := float64(0)
 	for i := 1; i < len(points)-1; i++ {
